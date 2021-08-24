@@ -1,6 +1,4 @@
-# Nanopore_workflows
-
-## Workflow: Haplotype_phasing
+# Workflow: Haplotype_phasing
 
 The Haplotype_phasing workflow is intended to assign each read of an input file to a haplotype of diploid origin.
 The core of that process is formed by the NanoMethPhase tool which was developed by [Akbari et al. in 2021](https://doi.org/10.1186/s13059-021-02283-5).
@@ -9,7 +7,7 @@ The workflow can be used in two ways, which differ in their starting points. On 
 ![alt text](https://github.com/CompEpigen/Nanopore_workflows/blob/main/wf_flowchart.png)
 
 
-### Option 1: starting at bam-file
+## Option 1: starting at bam-file
 If you already have an alinged bam-file, you can use the "Haplotype_phasing.cwl" workflow, which is indicated by the colour green in the flowchart above.
 To use this, the following input files are required:
 * **nanopore.bam**; bam file with additional index file (.bai)
@@ -55,7 +53,7 @@ bsub -W 48:00 -M 20000 -R "rusage[mem=20000]" -J "wf Haplotype phasing $run" \
 ```
 
 
-### Option 2: starting at fastq-file
+## Option 2: starting at fastq-file
 To use the second option, which starts from the fastq file, the workflow "full_processing.cwl" must be used, which is marked in yellow in the flowchart. This actually executes two sub-workflows, which on the one hand is formed by the "Haplotype_phasing.cwl" workflow mentioned in option 1, which is preceded by a second "alignment.cwl" workflow. This creates a bam file from fastq file and the methylation calls needed for the second workflow.
 Option 2 therefore requires the following inputs:
 * **nanopore.fastq**; fastqfile of nanopore data with additional index files pointing to the fast5 directory (can be created by nanopolish index)
